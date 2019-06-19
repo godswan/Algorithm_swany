@@ -1,19 +1,18 @@
-#include <vector>
-#include <algorithm>
-
 using namespace std;
 
-int solution(vector<int> d, int budget) {
+int solution(int n) {
+
+	bool IsComposite[1000001];
 	int answer = 0;
 
-	sort(d.begin(), d.end());
-
-	for (int i = 0; i < d.size(); i++)
+	for (int i = 2; i <= n; i++)
 	{
-		if (budget - d[i] < 0)
-			break;
-		budget -= d[i];
-		answer++;
+		if (!IsComposite[i])
+		{
+			for (int j = 2 * i; j <= n; j += i)
+				IsComposite[j] = true;
+			answer++;
+		}
 	}
 
 	return answer;
